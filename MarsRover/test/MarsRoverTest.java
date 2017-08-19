@@ -18,8 +18,8 @@ public class MarsRoverTest {
     @Before
     public void setUp() {
         Coordinates coordinates = new Coordinates();
-        CardinalPoints cardinalPoints = new North();
-        robotic = new Robotic(coordinates, cardinality);        
+        CardinalPoint cardinalPoint = new CardinalPoint(CardinalPoint.NORTH);     
+        robotic = new Robotic(coordinates, cardinalPoint);        
     }
     
     @Test
@@ -47,6 +47,7 @@ public class MarsRoverTest {
         assertEquals(6, coordinates.getX());
     }
     
+    @Test
     public void testDecrementCoordinateX() {
         Coordinates coordinates = new Coordinates(5, 5);
         coordinates.decrementX();
@@ -57,7 +58,7 @@ public class MarsRoverTest {
     @Test
     public void testIncrementCoordinateY() {
         Coordinates coordinates = new Coordinates(5, 5);
-        coordinates.incrementX();
+        coordinates.incrementY();
         int expected = 6;
         assertEquals(6, coordinates.getY());
     }
@@ -65,36 +66,137 @@ public class MarsRoverTest {
     @Test
     public void testDecrementCoordinateY() {
         Coordinates coordinates = new Coordinates(5, 5);
-        coordinates.decrementX();
+        coordinates.decrementY();
         int expected = 4;
         assertEquals(4, coordinates.getY());
     }
     
     @Test
-    public void testCadinality() {
-        Cardinality cardinality = new Cardinality(Cardinality.NORTH);
-        char expected = Cardinality.NORTH;
-        assertEquals(expected, cardinality.getCardinality());
+    public void testCardinalPoint() {
+        CardinalPoint cardinalPoint = new CardinalPoint(CardinalPoint.NORTH);
+        char expected = CardinalPoint.NORTH;
+        assertEquals(expected, cardinalPoint.getCardinalPoint());
     }
     
     @Test
-    public void turnRight() {
+    public void turnRight90Degrees() {
         robotic.moveRight();
-        char expected = Cardinality.;
-        assertEquals(coordinatesExpected, robotic.getCoordinates());
+        char expected = CardinalPoint.EAST;
+        assertEquals(expected, robotic.getCardinalPoint());
     }
     
     @Test
-    public void turnRightAndMove() {
+    public void turnRight180Degrees() {
         robotic.moveRight();
-        Coordinates coordinatesExpected = new Coordinates(1, 0);
-        assertEquals(coordinatesExpected, robotic.getCoordinates());
+        robotic.moveRight();
+        char expected = CardinalPoint.SOUTH;
+        assertEquals(expected, robotic.getCardinalPoint());
+    }
+    
+    @Test
+    public void turnRight270Degrees() {
+        robotic.moveRight();
+        robotic.moveRight();
+        robotic.moveRight();
+        char expected = CardinalPoint.WEST;
+        assertEquals(expected, robotic.getCardinalPoint());
+    }
+    
+    @Test
+    public void turnRight360Degrees() {
+        robotic.moveRight();
+        robotic.moveRight();
+        robotic.moveRight();
+        robotic.moveRight();
+        char expected = CardinalPoint.NORTH;
+        assertEquals(expected, robotic.getCardinalPoint());
+    }
+    
+    @Test
+    public void turnLeft90Degrees() {
+        robotic.moveLeft();
+        char expected = CardinalPoint.WEST;
+        assertEquals(expected, robotic.getCardinalPoint());
+    }
+    
+    @Test
+    public void turnLeft180Degrees() {
+        robotic.moveLeft();
+        robotic.moveLeft();
+        char expected = CardinalPoint.SOUTH;
+        assertEquals(expected, robotic.getCardinalPoint());
+    }
+    
+    @Test
+    public void turnLeft270Degrees() {
+        robotic.moveLeft();
+        robotic.moveLeft();
+        robotic.moveLeft();
+        char expected = CardinalPoint.EAST;
+        assertEquals(expected, robotic.getCardinalPoint());
+    }
+    
+    @Test
+    public void turnLeft360Degrees() {
+        robotic.moveLeft();
+        robotic.moveLeft();
+        robotic.moveLeft();
+        robotic.moveLeft();
+        char expected = CardinalPoint.NORTH;
+        assertEquals(expected, robotic.getCardinalPoint());
+    }
+    
+    @Test
+    public void moveNorth() {        
+        robotic.moveForward();
+        int y = 1;
+        int x = 0;
+        assertEquals(y, robotic.getCoordinates().getY());
+        assertEquals(x, robotic.getCoordinates().getX());
+    }
+    
+    @Test
+    public void moveEast() {        
+        robotic.moveRight();
+        robotic.moveForward();
+        int y = 0;
+        int x = 1;
+        assertEquals(y, robotic.getCoordinates().getY());
+        assertEquals(x, robotic.getCoordinates().getX());
+    }
+    
+    @Test
+    public void moveSouth() {
+        robotic.moveRight();
+        robotic.moveRight();
+        robotic.moveForward();
+        int y = -1;
+        int x = 0;
+        assertEquals(y, robotic.getCoordinates().getY());
+        assertEquals(x, robotic.getCoordinates().getX());
     }
 
     @Test
-    public void moveLeft() {}
-
-    @Test
-    public void moveForward() {}    
+    public void moveWest() {
+        robotic.moveRight();
+        robotic.moveRight();
+        robotic.moveRight();
+        robotic.moveForward();
+        int y = 0;
+        int x = -1;
+        assertEquals(y, robotic.getCoordinates().getY());
+        assertEquals(x, robotic.getCoordinates().getX());
+    }    
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void cardinalPointInvalid() {
+        CardinalPoint cardinalPoint = new CardinalPoint('X');        
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void setCardinalPointInvalid() {
+        CardinalPoint cardinalPoint = new CardinalPoint(CardinalPoint.EAST);   
+        cardinalPoint.setCardinalPoint('X');
+    }
     
 }

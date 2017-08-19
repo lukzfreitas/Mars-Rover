@@ -12,22 +12,75 @@
  */
 class Robotic {
     private Coordinates coordinates;
-    private CardinalPoints cardinalPoint;
+    private CardinalPoint cardinalPoint;
 
-    public Robotic(Coordinates coordinates, CardinalPoints cardinalPoint) {
+    public Robotic(Coordinates coordinates, CardinalPoint cardinalPoint) {
         this.coordinates = coordinates;
         this.cardinalPoint = cardinalPoint;
     }   
 
     public void moveRight() {
-        
+        switch(cardinalPoint.getCardinalPoint()) {
+            case CardinalPoint.NORTH :
+                cardinalPoint.setCardinalPoint(CardinalPoint.EAST);
+                break;
+            case CardinalPoint.EAST :
+                cardinalPoint.setCardinalPoint(CardinalPoint.SOUTH);
+                break;
+            case CardinalPoint.SOUTH :
+                cardinalPoint.setCardinalPoint(CardinalPoint.WEST);
+                break;
+            case CardinalPoint.WEST :
+                cardinalPoint.setCardinalPoint(CardinalPoint.NORTH);
+                break;                
+            default:
+                throw new IllegalArgumentException("Cardinal point invalid");              
+        }
+    }
+    
+    public void moveLeft () {
+        switch(cardinalPoint.getCardinalPoint()) {
+            case CardinalPoint.NORTH :
+                cardinalPoint.setCardinalPoint(CardinalPoint.WEST);
+                break;
+            case CardinalPoint.WEST :
+                cardinalPoint.setCardinalPoint(CardinalPoint.SOUTH);
+                break;
+            case CardinalPoint.SOUTH :
+                cardinalPoint.setCardinalPoint(CardinalPoint.EAST);
+                break;
+            case CardinalPoint.EAST :
+                cardinalPoint.setCardinalPoint(CardinalPoint.NORTH);
+                break;                
+            default:
+                throw new IllegalArgumentException("Cardinal point invalid");              
+        }
+    }
+    
+    public void moveForward() {
+        switch(cardinalPoint.getCardinalPoint()) {
+            case CardinalPoint.NORTH :
+                coordinates.incrementY();
+                break;
+            case CardinalPoint.EAST :
+                coordinates.incrementX();
+                break;
+            case CardinalPoint.SOUTH :
+                coordinates.decrementY();
+                break;
+            case CardinalPoint.WEST :
+                coordinates.decrementX();
+                break;                
+            default:
+                throw new IllegalArgumentException("Cardinal point invalid");              
+        }
     }
 
     public Coordinates getCoordinates() {
         return coordinates;
-    }
+    }  
 
     public char getCardinalPoint() {
-        
+        return cardinalPoint.getCardinalPoint();
     }
 }
