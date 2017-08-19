@@ -83,4 +83,12 @@ class Robotic {
     public char getCardinalPoint() {
         return cardinalPoint.getCardinalPoint();
     }
+
+    @Override
+    public String toString() {
+        return coordinates.toString() + " " + cardinalPoint.getCardinalPoint();
+    }
+    
+    
+    
 }
