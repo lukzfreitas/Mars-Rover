@@ -8,7 +8,7 @@
 
 /**
  *
- * @author Lucas
+ * @author Camila and Lucas
  */
 class Coordinates {
     private int x;

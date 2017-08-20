@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Lucas
+ * @author Camila and Lucas
  */
 public class MarsRoverTest {
     

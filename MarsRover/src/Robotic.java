@@ -8,7 +8,7 @@
 
 /**
  *
- * @author Lucas
+ * @author Camila and Lucas
  */
 class Robotic {
     private Coordinates coordinates;

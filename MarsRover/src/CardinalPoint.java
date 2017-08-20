@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Lucas
+ * @author Camila and Lucas
  */
 public class CardinalPoint {
 

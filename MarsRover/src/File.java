@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Lucas
+ * @author Camila and Lucas
  */
 public class File {
     public static void read(String filePath) {
