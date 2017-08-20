@@ -21,16 +21,16 @@ public class File {
     public static void read(String filePath) {
           try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));            
-            String line = br.readLine();                        
+            String line = br.readLine();                         
             Scanner sc = new Scanner(line).useDelimiter(" ");                
             int x = Integer.parseInt(sc.next());   
             int y = Integer.parseInt(sc.next());   
             while (br.ready()) {                                
-                Coordinates coordinates = new Coordinates(x, y);
-                line =  br.readLine();
-                sc = new Scanner(line).useDelimiter(" ");
+                line = br.readLine();                 
+                sc = new Scanner(line).useDelimiter(" ");                
                 x = Integer.parseInt(sc.next());   
                 y = Integer.parseInt(sc.next());   
+                Coordinates coordinates = new Coordinates(x, y);                                
                 char cardinalPointChar = sc.next().charAt(0);                   
                 CardinalPoint cardinalPoint = new CardinalPoint(cardinalPointChar);                                
                 char[] commands =  br.readLine().toCharArray();
